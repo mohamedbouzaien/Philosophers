@@ -6,42 +6,51 @@
 #    By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/12 23:24:12 by mbouzaie          #+#    #+#              #
-#    Updated: 2021/12/16 20:58:55 by mbouzaie         ###   ########.fr        #
+#    Updated: 2021/12/17 19:23:37 by mbouzaie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philo
+HEADERS			= -I incs/
 
-CC = clang
+OBJ_DIR			= objs/
+SRC_DIR			= srcs/
 
-FLAGS = -g -fsanitize=address -Wall -Wextra -Werror
 
-SRCS = srcs/main.c
+SRCS			= main.c utils.c
+CFIND			= $(SRCS:%=$(SRC_DIR)%)
+OFILE			= $(SRCS:%.c=%.o)
+OBJS			= $(addprefix $(OBJ_DIR), $(OFILE))
 
-OBJS = $(SRCS:.cpp=.o)
 
-HEADER_PATH = incs/
 
-SRCS_PATH = srcs/
+CC				= gcc
+RM				= rm -f
+CFLAGS			= -g -fsanitize=address -Wall -Wextra -Werror -o
 
-HEADER_INCS = philosophers.h
+NAME			= philo
 
-all		: 	$(NAME)
 
-$(NAME)	:	$(OBJS)
-			@$(CC) -o $(NAME) $(FLAGS) $(OBJS)
+all:			$(OBJ_DIR) $(NAME)
 
-$(OBJS)	:	$(addprefix $(HEADER_PATH), $(HEADER_INCS))
+$(OBJ_DIR):
+				mkdir -p $(OBJ_DIR)
 
-clean	:	
-				@rm -rf $(OBJS)
+$(NAME):		$(OBJS)
+				$(CC) $(CFLAGS) $(NAME) $(HEADERS) $(OBJS) -lpthread
 
-fclean	:	clean
-				@rm -rf $(NAME)
 
-re		:	fclean all
+$(OBJS): $(CFIND)
+			make $(OFILE)
 
-.PHONY	:	all clean fclean re
+$(OFILE):
+			$(CC) $(HEADERS) -c $(CFLAGS) $(OBJ_DIR)$@ $(SRC_DIR)$(@:%.o=%.c)
 
-%.o		:	%.c
-			@$(CC) $(FLAGS) -o $@ -c $<
+clean:
+				$(RM) -r $(OBJ_DIR)
+
+fclean:			clean
+				$(RM) $(NAME)
+
+re:				fclean all
+
+.PHONY:			all clean fclean re

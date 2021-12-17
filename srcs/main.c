@@ -5,63 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 21:40:19 by mbouzaie          #+#    #+#             */
-/*   Updated: 2021/12/16 20:53:27 by mbouzaie         ###   ########.fr       */
+/*   Created: 2021/12/17 17:49:55 by mbouzaie          #+#    #+#             */
+/*   Updated: 2021/12/17 20:14:38 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pthread.h>
+#include "../incs/philosophers.h"
 #include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
 
-typedef struct s_p
+int	main(int ac, char **av)
 {
-	int             i;
-	pthread_mutex_t mutex;
-}               t_p;
+	t_rules	rules;
 
-int     ft_strlen(char *str)
-{
-	int     i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-void	*go1(void *pp)
-{
-	char *str;
-	int		i = 0;
-	t_p		*ppp;
-
-	ppp = (t_p *)pp;
-
-	str = "thread 1: coucou ça va? \n";
-	pthread_mutex_lock(&ppp->mutex);
-	while (str[i])
+	if (ac > 4)
 	{
-		write(1, &str[i], 1);
-		i++;
+		rules.number = ft_atoi(av[1]);
+		rules.die_t = ft_atoi(av[2]);
+		rules.eat_t = ft_atoi(av[3]);
+		rules.sleep_t = ft_atoi(av[4]);
+		if (ac == 6)
+			rules.eat_n = ft_atoi(av[5]);
 	}
-	pthread_mutex_unlock(&ppp->mutex);
-	return (NULL);
-}
-
-int		main()
-{
-	pthread_t	thread_id1;
-	pthread_t	thread_id2;
-	t_p			p;
-	t_p			*pp;
-
-	pp = malloc(sizeof(t_p) * 1);
-	pp = &p;
-	p.i = 3;
-	pthread_mutex_init(&p.mutex, NULL);			// obligatoire de init le mutex
-    pthread_create(&thread_id1, NULL, go1, (void *)pp);
-    pthread_create(&thread_id2, NULL, go1, (void *)pp);
-	sleep(1);
+	print_action(300, 1, " has taken a fork\n");
 }

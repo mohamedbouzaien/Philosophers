@@ -6,7 +6,7 @@
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 18:06:50 by mbouzaie          #+#    #+#             */
-/*   Updated: 2021/12/17 20:14:20 by mbouzaie         ###   ########.fr       */
+/*   Updated: 2021/12/28 22:39:01 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_putchar_fd(char c, int fd)
 	write(fd, &c, 1);
 }
 
-int	ft_strlen(char *str)
+int	ft_strlen(const char *str)
 {
 	int	i;
 
@@ -88,10 +88,27 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putchar_fd(n + 48, fd);
 }
 
-void	print_action(int timestamp, int philo, char *action)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	ft_putnbr_fd(timestamp, 1);
-	ft_putchar_fd(' ', 1);
-	ft_putnbr_fd(philo, 1);
-	ft_putstr_fd(action, 1);
+	size_t	i;
+	size_t	n;
+
+	i = 0;
+	n = ft_strlen(s1);
+	while (s1[i] && s1[i] == s2[i] && i < n)
+		i++;
+	if (i == n || n == 0)
+		return (0);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
+
+void	print_action(uint64_t timestamp, t_philo *philo, char *action)
+{
+	pthread_mutex_lock(&(philo->args->write_m));
+	ft_putnbr_fd(timestamp - philo->args->start_t, 1);
+	ft_putchar_fd(' ', 1);
+	ft_putnbr_fd(philo->id, 1);
+	ft_putstr_fd(action, 1);
+	pthread_mutex_unlock(&(philo->args->write_m));
+}
+

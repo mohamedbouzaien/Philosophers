@@ -6,7 +6,7 @@
 #    By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/12 23:24:12 by mbouzaie          #+#    #+#              #
-#    Updated: 2021/12/20 19:02:30 by mbouzaie         ###   ########.fr        #
+#    Updated: 2021/12/29 13:52:16 by mbouzaie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJS			= $(addprefix $(OBJ_DIR), $(OFILE))
 
 CC				= gcc
 RM				= rm -f
-CFLAGS			= -g -fsanitize=thread -Wall -Wextra -Werror -o ##
+CFLAGS			= -g -fsanitize=thread -Wall -Wextra -Werror -o
 
 NAME			= philo
 
@@ -36,7 +36,7 @@ $(OBJ_DIR):
 				mkdir -p $(OBJ_DIR)
 
 $(NAME):		$(OBJS)
-				$(CC) $(CFLAGS) $(NAME) $(HEADERS) $(OBJS) -lpthread
+				$(CC) -lpthread $(CFLAGS) $(NAME) $(HEADERS) $(OBJS)
 
 
 $(OBJS): $(CFIND)

@@ -6,7 +6,7 @@
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 16:32:02 by mbouzaie          #+#    #+#             */
-/*   Updated: 2021/12/29 00:37:35 by mbouzaie         ###   ########.fr       */
+/*   Updated: 2021/12/30 18:14:17 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,20 @@ typedef struct s_args
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	death_m;
-} t_args;
+}	t_args;
 
-int		ft_atoi(const char *str);
-void	print_action(uint64_t timestamp, t_philo *philo, char *action);
+int			ft_atoi(const char *str);
+int			ft_strlen(const char *str);
+int			check_death(t_args *args);
+int			init(t_args *args);
+int			do_actions(t_philo *philo);
+int			create_threads(t_args *args);
+void		ft_usleep(uint64_t time);
+void		*life_cycle(void *arg);
+void		observe(t_args *args);
+void		ft_putstr_fd(char *str, int fd);
+void		ft_putchar_fd(char c, int fd);
+void		print_action(uint64_t timestamp, t_philo *philo, char *action);
+uint64_t	get_time(void);
 
 #endif

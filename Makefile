@@ -6,7 +6,7 @@
 #    By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/12 23:24:12 by mbouzaie          #+#    #+#              #
-#    Updated: 2021/12/29 13:52:16 by mbouzaie         ###   ########.fr        #
+#    Updated: 2021/12/30 18:11:37 by mbouzaie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ OBJ_DIR			= objs/
 SRC_DIR			= srcs/
 
 
-SRCS			= main.c utils.c
+SRCS			= utils_suite.c utils.c observe.c threads.c main.c
 CFIND			= $(SRCS:%=$(SRC_DIR)%)
 OFILE			= $(SRCS:%.c=%.o)
 OBJS			= $(addprefix $(OBJ_DIR), $(OFILE))

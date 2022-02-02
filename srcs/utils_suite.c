@@ -6,7 +6,7 @@
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 17:55:59 by mbouzaie          #+#    #+#             */
-/*   Updated: 2022/02/02 15:01:31 by mbouzaie         ###   ########.fr       */
+/*   Updated: 2022/02/02 17:05:17 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	print_action(uint64_t timestamp, t_philo *philo, char *action)
 		ft_putchar_fd(' ', 1);
 		ft_putnbr_fd(philo->id, 1);
 		ft_putstr_fd(action, 1);
+		if (!ft_strcmp(action, " died\n") && philo->args->number == 1)
+			pthread_mutex_unlock(&philo->args->forks[0]);
 	}
 	pthread_mutex_unlock(&(philo->args->write_m));
 }

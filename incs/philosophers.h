@@ -6,7 +6,7 @@
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 16:32:02 by mbouzaie          #+#    #+#             */
-/*   Updated: 2021/12/30 18:14:17 by mbouzaie         ###   ########.fr       */
+/*   Updated: 2022/02/02 16:45:38 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void		*life_cycle(void *arg);
 void		observe(t_args *args);
 void		ft_putstr_fd(char *str, int fd);
 void		ft_putchar_fd(char c, int fd);
+void		putdown_forks(t_philo *philo);
 void		print_action(uint64_t timestamp, t_philo *philo, char *action);
 uint64_t	get_time(void);
 

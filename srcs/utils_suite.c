@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utis_suite.c                                       :+:      :+:    :+:   */
+/*   utils_suite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 17:55:59 by mbouzaie          #+#    #+#             */
-/*   Updated: 2021/12/30 17:57:26 by mbouzaie         ###   ########.fr       */
+/*   Updated: 2022/02/02 15:01:31 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,13 @@ int	ft_strcmp(const char *s1, const char *s2)
 void	print_action(uint64_t timestamp, t_philo *philo, char *action)
 {
 	pthread_mutex_lock(&(philo->args->write_m));
-	ft_putnbr_fd(timestamp - philo->args->start_t, 1);
-	ft_putchar_fd(' ', 1);
-	ft_putnbr_fd(philo->id, 1);
-	ft_putstr_fd(action, 1);
+	if (philo->args->finish != 1 || !ft_strcmp(action, " died\n"))
+	{
+		ft_putnbr_fd(timestamp - philo->args->start_t, 1);
+		ft_putchar_fd(' ', 1);
+		ft_putnbr_fd(philo->id, 1);
+		ft_putstr_fd(action, 1);
+	}
 	pthread_mutex_unlock(&(philo->args->write_m));
 }
 

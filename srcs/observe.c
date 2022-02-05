@@ -6,7 +6,7 @@
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 17:58:34 by mbouzaie          #+#    #+#             */
-/*   Updated: 2022/02/02 17:03:24 by mbouzaie         ###   ########.fr       */
+/*   Updated: 2022/02/05 21:23:13 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	observe_eating(t_args *args)
 			pthread_mutex_lock(&args->death_m);
 			pthread_mutex_lock(&(args->write_m));
 			args->finish = 1;
-			pthread_mutex_lock(&(args->write_m));
+			pthread_mutex_unlock(&(args->write_m));
 			pthread_mutex_unlock(&args->death_m);
 		}
 	}

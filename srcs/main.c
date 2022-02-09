@@ -6,7 +6,7 @@
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:49:55 by mbouzaie          #+#    #+#             */
-/*   Updated: 2022/02/02 16:42:49 by mbouzaie         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:55:53 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	main(int ac, char **av)
 		args->eat_n = 0;
 		if (ac == 6)
 			args->eat_n = ft_atoi(av[5]);
-		if (init(args))
+		if (((ac == 6 && args->eat_n != 0) || ac < 6) && init(args))
 		{
 			create_threads(args);
 			observe(args);

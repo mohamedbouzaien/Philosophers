@@ -6,7 +6,7 @@
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 17:58:34 by mbouzaie          #+#    #+#             */
-/*   Updated: 2022/02/05 21:23:13 by mbouzaie         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:50:40 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	observe(t_args *args)
 {
 	int	i;
 
-	while (!args->finish)
+	while (!args->finish && args->number)
 	{
 		i = 0;
 		while (i < args->number && !args->finish)
